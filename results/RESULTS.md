@@ -1,6 +1,6 @@
 # Results (raw CSV: `decode-results.csv`)
 
-Decode = tok/s on a 256-token generation after a short prompt, temperature 0, streamed, one request at a time (`scripts/smoke-single.py`, `single` leg). Prefill = tok/s on a 16.7k-token prompt (`long` leg, first rep only, when measured). Median of the reps shown. Noise between identical configs was about 0.5 tok/s on ik_llama.cpp, so treat gaps under about 0.8 tok/s as no difference.
+Decode = tok/s on a 256-token generation after a short prompt, temperature 0, streamed, one request at a time (`scripts/smoke-single.py`, `single` leg). Prefill = tok/s on a 16.7k-token prompt (`long` leg, first rep only, because reps 2 and 3 hit the server's prompt cache and finish in about half a second). Median of the reps shown. Noise between identical configs was about 0.5 tok/s on ik_llama.cpp, so treat gaps under about 0.8 tok/s as no difference.
 
 All runs: GLM-5.3-Flash Maya-S v2 IQ2_XXS (3 GGUF shards, 96.5 GB), 2x RTX 3080 20 GB, dual Xeon Gold 6138, 262 GB DDR4. See the README for versions.
 
@@ -53,15 +53,15 @@ Every `--n-cpu-moe` value below 28 failed to load, at every `-ts` split tried. T
 | Row | What changed | Decode tok/s (median) | Range | Reps | Prefill tok/s |
 |---|---|---|---|---|---|
 | `maya-s-res2000` | 16k ctx, 2000 MiB VRAM reserve, MTP drafting | **37.1** | 32.9-37.3 | 3 | n/a |
-| `maya-s-c32k-res2000` | 32k ctx requested (see note), reserve 2000 | **33.3** | 31.2-34.3 | 3 | n/a |
-| `maya-s-c32k-res1000` | reserve 1000 | **33.7** | 31.7-34.4 | 3 | n/a |
-| `maya-s-c32k-res2000-nommap` | `--mmap-experts off` | **32.9** | 29.8-33.0 | 3 | n/a |
+| `maya-s-c32k-res2000` | same as the row above (ran at 16k, see note) | **33.3** | 31.2-34.3 | 3 | n/a |
+| `maya-s-c32k-res1000` | reserve 1000 MiB (16k, flag from row label) | **33.7** | 31.7-34.4 | 3 | n/a |
+| `maya-s-c32k-res2000-nommap` | `--mmap-experts` off (16k, flag from row label) | **32.9** | 29.8-33.0 | 3 | n/a |
 | `maya-ctx32k` | true 32k ctx | **31.4** | 31.0-35.2 | 3 | 945 |
 | `maya-ctx32k-rep2` | true 32k ctx, repeat | **33.2** | 30.9-34.6 | 3 | 941 |
 | `maya-ctx32k-pf32k` | true 32k ctx, `--prefill 32768` | **32.4** | 30.0-35.2 | 3 | 743 |
 | `maya-ctx32k-nodraft` | true 32k ctx, `--drafting off` | **32.1** | 31.9-35.0 | 3 | 951 |
 
-Note: the first three `maya-s-c32k-*` rows were meant to be 32k context. Passing `--context 32768` on the `maya.py` command line did not override the config: the server's ready line still said 16384. Editing `--max-context` in the config JSON did. So those three ran at 16k and the `maya-ctx32k*` rows are the real 32k runs. `maya-s-c32k-res2000-pf32k` failed to load (cause not investigated) and was redone as `maya-ctx32k-pf32k`. The first run (37.1) has no prefill number because a 16.7k-token prompt does not fit in a 16k context (the server returned HTTP 400).
+Note: the four `maya-s-*` rows ran at 16k context. Three of them were meant to be 32k: passing `--context 32768` on the `maya.py` command line did not override the config, and every one of those logs says `context 16384 tokens`. Editing `--max-context` in the config JSON did work, and the `maya-ctx32k*` rows (log says `context 32768 tokens`) are the real 32k runs. `maya-s-res2000` and `maya-s-c32k-res2000` are the same effective config and landed at 37.1 and 33.3, so run-to-run spread on Maya is at least that wide. The long-prompt leg returned `HTTP Error 400: Bad Request` on every 16k row (the 16.7k-token prompt does not fit in 16k), so those rows have no prefill number. `maya-s-c32k-res2000-pf32k` failed to load (cause not investigated) and was redone as `maya-ctx32k-pf32k`.
 
 ## Context depth ladder on Maya (one run per depth)
 
