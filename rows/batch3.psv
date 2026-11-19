@@ -1,0 +1,6 @@
+b3-m28-c8k-ub256|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 --spec-type mtp:n_max=1,p_min=0.0 -c 8192 -ub 256 --n-cpu-moe 28
+b3-m27-c8k-ub256|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 --spec-type mtp:n_max=1,p_min=0.0 -c 8192 -ub 256 --n-cpu-moe 27
+b3-m26-c8k-ub256|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 --spec-type mtp:n_max=1,p_min=0.0 -c 8192 -ub 256 --n-cpu-moe 26
+b3-m28-c20k-ub128|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 --spec-type mtp:n_max=1,p_min=0.0 -c 20480 -ub 128 --n-cpu-moe 28
+b3-nomtp-m27-c8k-ub256|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 -c 8192 -ub 256 --n-cpu-moe 27
+b3-nomtp-m26-c8k-ub256|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 -c 8192 -ub 256 --n-cpu-moe 26

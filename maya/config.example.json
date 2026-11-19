@@ -1,0 +1,48 @@
+{
+  "exe": "<MAYA_DIR>/build/maya",
+  "args": [
+    "--glm-pack",
+    "<GGUF_DIR>/pack",
+    "--max-context",
+    "16384",
+    "--expert-cache",
+    "auto",
+    "--prefill",
+    "auto",
+    "--kv-streaming",
+    "on",
+    "--expert-profile",
+    "<MAYA_DIR>/data/expert-profile-glm.bin",
+    "--vram-reserve-mib",
+    "2000"
+  ],
+  "cwd": "<MAYA_DIR>",
+  "tokenizer": "<GGUF_DIR>/pack/tokenizer",
+  "model_name": "glm-5.3-flash",
+  "gpu": [
+    0,
+    1
+  ],
+  "sampling": {
+    "temperature": 1.0,
+    "top_p": 0.95
+  },
+  "reasoning_effort": "max",
+  "lib_dirs": [
+    "<CUDA_12_6>/targets/x86_64-linux/lib"
+  ],
+  "port": 8180,
+  "vision": {
+    "exe": "<MAYA_DIR>/build-vision/bin/maya-vision",
+    "mmproj": "<GGUF_DIR>/vision/mmproj-GLM-5.3-Flash-F16.gguf",
+    "model": "<GGUF_DIR>/vision/GLM-5.3-Flash-vocab.gguf",
+    "gpu": true
+  },
+  "log": "<MAYA_DIR>/maya.log",
+  "installer": {
+    "quant": "Maya-S-v2-IQ2_XXS",
+    "gguf": "<GGUF_DIR>/GLM-5.3-Flash-Maya-S-v2-IQ2_XXS-00001-of-00003.gguf",
+    "gguf_dir": "<GGUF_DIR>",
+    "draft": "mtp"
+  }
+}

@@ -1,0 +1,8 @@
+b2-ref|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 --spec-type mtp:n_max=1,p_min=0.0 -c 20480 --n-cpu-moe 30
+b2-rtr|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 --spec-type mtp:n_max=1,p_min=0.0 -c 20480 --n-cpu-moe 30 -rtr
+b2-muge|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 --spec-type mtp:n_max=1,p_min=0.0 -c 20480 --n-cpu-moe 30 -muge
+b2-mqkv|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 --spec-type mtp:n_max=1,p_min=0.0 -c 20480 --n-cpu-moe 30 -mqkv
+b2-moe29|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 --spec-type mtp:n_max=1,p_min=0.0 -c 20480 --n-cpu-moe 29
+b2-moe28-c8k|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 --spec-type mtp:n_max=1,p_min=0.0 -c 8192 --n-cpu-moe 28
+b2-graph|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm graph --max-gpu 2 --numa distribute -t 40 --spec-type mtp:n_max=1,p_min=0.0 -c 20480 --n-cpu-moe 30
+b2-t36|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 36 --spec-type mtp:n_max=1,p_min=0.0 -c 20480 --n-cpu-moe 30

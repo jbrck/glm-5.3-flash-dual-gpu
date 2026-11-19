@@ -1,0 +1,8 @@
+b4-m27-ts55_45|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 -c 20480 -ub 128 --spec-type mtp:n_max=1,p_min=0.0 --n-cpu-moe 27 -ts 55,45
+b4-m27-ts60_40|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 -c 20480 -ub 128 --spec-type mtp:n_max=1,p_min=0.0 --n-cpu-moe 27 -ts 60,40
+b4-m27-ts70_30|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 -c 20480 -ub 128 --spec-type mtp:n_max=1,p_min=0.0 --n-cpu-moe 27 -ts 70,30
+b4-m26-ts60_40|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 -c 20480 -ub 128 --spec-type mtp:n_max=1,p_min=0.0 --n-cpu-moe 26 -ts 60,40
+b4-m26-ts70_30|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 -c 20480 -ub 128 --spec-type mtp:n_max=1,p_min=0.0 --n-cpu-moe 26 -ts 70,30
+b4-m26-ts80_20|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 -c 20480 -ub 128 --spec-type mtp:n_max=1,p_min=0.0 --n-cpu-moe 26 -ts 80,20
+b4-m25-ts70_30|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 -c 20480 -ub 128 --spec-type mtp:n_max=1,p_min=0.0 --n-cpu-moe 25 -ts 70,30
+b4-m25-ts80_20|GGML_CUDA_NO_PINNED=1|@IK@|@MODEL@|glm|-ngl 999 -fa on -sm layer --numa distribute -t 40 -c 20480 -ub 128 --spec-type mtp:n_max=1,p_min=0.0 --n-cpu-moe 25 -ts 80,20
