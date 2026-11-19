@@ -9,7 +9,7 @@ I wanted the fastest way to serve GLM-5.3-Flash (321B MoE, about 18B active) on 
 | Stack | Decode tok/s | vs baseline |
 |---|---|---|
 | ik_llama.cpp, plain layer split (baseline) | 15.7 | 1.00x |
-| ik_llama.cpp, best settings found | 18.4 | 1.17x |
+| ik_llama.cpp, best settings found | 18.4 (17.4 on a fresh-clone re-run) | 1.11x to 1.17x |
 | Project Maya, 16k context | 33 to 37 (best row 37.1) | 2.1x to 2.4x |
 | Project Maya, 32k context | 31 to 33 | about 2.0x |
 
@@ -114,6 +114,10 @@ Speed caveats:
 - **Warm cache.** Maya's reps run back to back, so later reps see a warmer expert cache. Rep 1 is often the slowest. On the 16.7k prompt, reps 2 and 3 hit the server's prompt cache, so I only report prefill from rep 1.
 - **One machine.** Different RAM speed, PCIe layout, or 24 GB cards will move the numbers. The ceiling here was VRAM, not bandwidth to the cards.
 - **Host toggles untested.** I had no sudo on the box. NUMA balancing, CPU governor and THP are unexplored.
+
+## Replication check
+
+I ran `b3-m28-c20k-ub128` once from a fresh clone of this repo, on the same box, with `REPS=1`. It loaded (227 s, cold page cache) and finished clean. Decode came in at **17.4 tok/s**, against 18.2 on rep 1 of the original run (18.4 median over 3). Prefill matched: 79.9 against 80.4. One rep is not enough to say whether the 0.8 gap is noise or a real difference between runs, so treat the best ik row as roughly 17.4 to 18.4, and the gain over baseline as roughly 1.1x to 1.17x.
 
 ## Replicate it
 
